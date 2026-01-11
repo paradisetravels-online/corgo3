@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paradise Travels – Luggage Booking</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Urbanist Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="files/style.css">
+</head>
+<body>
+
+<header class="top-header">
+    <h1>Paradise Travels</h1>
+    <p>Luggage & Parcel Booking</p>
+</header>
+
+<main class="wrapper">
+<form class="card">
+
+    <!-- Booking Details -->
+    <h2>Booking Details</h2>
+    <div class="grid-3">
+        <div class="field">
+            <label>Booking From</label>
+            <input type="text" id="fromCity" value="Chennai">
+        </div>
+
+        <div class="field">
+            <label>Delivery Location</label>
+            <input type="text" id="toCity" value="Hyderabad">
+        </div>
+
+        <div class="field">
+            <label>Booking Date</label>
+            <input type="date" id="bookingDate">
+        </div>
+
+        <div class="field">
+            <label>Luggage Type</label>
+            <select id="luggageType">
+                <option>Parcel</option>
+                <option>Cotton Box</option>
+                <option>Wooden Box</option>
+                <option>Poly Box/Bag</option>
+                <option>Iron Items</option>
+                <option>Electronics Items</option>
+            </select>
+        </div>
+
+        <div class="field">
+            <label>Total Weight (kg)</label>
+            <input type="number" id="weight">
+        </div>
+
+        <div class="field">
+            <label>No. of Items</label>
+            <input type="number" id="items">
+        </div>
+    </div>
+
+    <!-- Sender -->
+    <h3>Sender Details</h3>
+    <div class="grid-2">
+        <div class="field">
+            <label>Name</label>
+            <input type="text" id="senderName">
+        </div>
+        <div class="field">
+            <label>Mobile</label>
+            <input type="tel" id="senderMobile" pattern="[6-9][0-9]{9}">
+        </div>
+    </div>
+
+    <!-- Receiver -->
+    <div class="receiver-header">
+        <h3>Receiver Details</h3>
+        <label class="checkbox">
+            <input type="checkbox" id="sameAsSender">
+            Same as Sender
+        </label>
+    </div>
+
+    <div class="grid-2">
+        <div class="field">
+            <label>Name</label>
+            <input type="text" id="receiverName">
+        </div>
+        <div class="field">
+            <label>Mobile</label>
+            <input type="tel" id="receiverMobile" pattern="[6-9][0-9]{9}">
+        </div>
+    </div>
+
+    <!-- Payment -->
+    <h3>Payment</h3>
+    <div class="grid-2">
+        <div class="field">
+            <label>Price (₹)</label>
+            <input type="number" id="price">
+        </div>
+
+        <div class="field">
+            <label>GST No (optional)</label>
+            <input type="text" id="gstNo" placeholder="29ABCDE1234F1Z5">
+        </div>
+
+        <div class="field">
+            <label>Payment Method</label>
+            <select id="paymentMethod">
+                <option>Select</option>
+                <option>Cash</option>
+                <option>UPI</option>
+                <option>Card</option>
+            </select>
+        </div>
+    </div>
+
+    <button type="button" class="btn-primary" onclick="submitBooking()">
+        Book & Print
+    </button>
+
+</form>
+</main>
+
+<footer>
+    © 2026 Paradise Travels
+</footer>
+
+<script>
+// ---------- AUTO DATE ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    document.getElementById("bookingDate").value = `${yyyy}-${mm}-${dd}`;
+});
+
+// ---------- SAME AS SENDER ----------
+const sameCheckbox = document.getElementById("sameAsSender");
+const senderName = document.getElementById("senderName");
+const senderMobile = document.getElementById("senderMobile");
+const receiverName = document.getElementById("receiverName");
+const receiverMobile = document.getElementById("receiverMobile");
+
+function syncReceiver() {
+    if (sameCheckbox.checked) {
+        receiverName.value = senderName.value;
+        receiverMobile.value = senderMobile.value;
+    }
+}
+
+sameCheckbox.addEventListener("change", () => {
+    if (sameCheckbox.checked) {
+        syncReceiver();
+        receiverName.readOnly = true;
+        receiverMobile.readOnly = true;
+        senderName.addEventListener("input", syncReceiver);
+        senderMobile.addEventListener("input", syncReceiver);
+    } else {
+        receiverName.value = "";
+        receiverMobile.value = "";
+        receiverName.readOnly = false;
+        receiverMobile.readOnly = false;
+        senderName.removeEventListener("input", syncReceiver);
+        senderMobile.removeEventListener("input", syncReceiver);
+    }
+});
+
+// ---------- INVOICE NUMBER ----------
+function generateInvoiceNo() {
+    const prefix = "PT"; // Paradise Travels
+    const bookingDate = document.getElementById("bookingDate").value;
+
+    if (!bookingDate) {
+        alert("Please select booking date");
+        return null;
+    }
+
+    const dateStr = bookingDate.replaceAll("-", "");
+    const key = `lastInvoice_${dateStr}`;
+
+    let count = parseInt(localStorage.getItem(key) || "0", 10) + 1;
+    localStorage.setItem(key, count);
+
+    return `${prefix}/${dateStr}/${String(count).padStart(4, "0")}`;
+}
+
+// ---------- SUBMIT ----------
+function submitBooking() {
+
+
+    const data = {
+        invoiceNo: generateInvoiceNo(),
+        from: fromCity.value,
+        to: toCity.value,
+        date: bookingDate.value,
+        luggage: luggageType.value,
+        weight: weight.value,
+        items: items.value,
+        senderName: senderName.value,
+        senderMobile: senderMobile.value,
+        receiverName: receiverName.value,
+        receiverMobile: receiverMobile.value,
+        price: price.value,
+        gstNo: gstNo.value || "—",
+        payment: paymentMethod.value
+    };
+
+    localStorage.setItem("bookingData", JSON.stringify(data));
+    window.location.href = "print.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const editMode = localStorage.getItem("editMode");
+    const data = JSON.parse(localStorage.getItem("bookingData"));
+
+    if (editMode === "true" && data) {
+        fromCity.value = data.from;
+        toCity.value = data.to;
+        bookingDate.value = data.date;
+        luggageType.value = data.luggage;
+        weight.value = data.weight;
+        items.value = data.items;
+
+        senderName.value = data.senderName;
+        senderMobile.value = data.senderMobile;
+        receiverName.value = data.receiverName;
+        receiverMobile.value = data.receiverMobile;
+
+        price.value = data.price;
+        gstNo.value = data.gstNo !== "—" ? data.gstNo : "";
+        paymentMethod.value = data.payment;
+
+        // clear edit flag after loading
+        localStorage.removeItem("editMode");
+    }
+});
+
+</script>
+
+</body>
+</html>
