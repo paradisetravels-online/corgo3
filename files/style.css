@@ -1,8 +1,9 @@
-/* ----------------- GLOBAL ----------------- */
+/* ===============================
+   GLOBAL
+================================ */
 * {
     box-sizing: border-box;
     font-family: 'Urbanist', sans-serif;
-    font-weight: 600;
 }
 
 body {
@@ -11,7 +12,9 @@ body {
     color: #2b2b2b;
 }
 
-/* ----------------- HEADER ----------------- */
+/* ===============================
+   HEADER (BOOKING PAGE)
+================================ */
 .top-header {
     background: linear-gradient(90deg, #0A3D62, #083358);
     color: #fff;
@@ -22,6 +25,7 @@ body {
 .top-header h1 {
     margin: 0;
     font-size: 26px;
+    font-weight: 700;
 }
 
 .top-header p {
@@ -30,29 +34,36 @@ body {
     opacity: 0.9;
 }
 
-/* ----------------- LAYOUT ----------------- */
+/* ===============================
+   LAYOUT
+================================ */
 .wrapper {
     max-width: 1000px;
     margin: 20px auto;
     padding: 10px;
 }
 
-.card, .invoice {
+.card {
     background: #ffffff;
     border-radius: 8px;
     padding: 25px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* ----------------- TITLES ----------------- */
+/* ===============================
+   TITLES
+================================ */
 h2, h3 {
     color: #0A3D62;
     border-bottom: 2px solid #dbe3ea;
     padding-bottom: 5px;
     margin-top: 25px;
+    font-weight: 600;
 }
 
-/* ----------------- GRID ----------------- */
+/* ===============================
+   GRID
+================================ */
 .grid-2 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -65,10 +76,12 @@ h2, h3 {
     gap: 18px;
 }
 
-/* ----------------- FORM FIELDS ----------------- */
+/* ===============================
+   FORM FIELDS
+================================ */
 .field label {
-    font-weight: bold;
     font-size: 13px;
+    font-weight: 600;
     color: #083358;
 }
 
@@ -79,6 +92,7 @@ h2, h3 {
     margin-top: 4px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    font-size: 14px;
 }
 
 .field input:focus,
@@ -92,7 +106,9 @@ input[readonly] {
     cursor: not-allowed;
 }
 
-/* ----------------- RECEIVER ----------------- */
+/* ===============================
+   RECEIVER HEADER
+================================ */
 .receiver-header {
     display: flex;
     justify-content: space-between;
@@ -105,57 +121,14 @@ input[readonly] {
 }
 
 /* ===============================
-   ACTION BUTTONS – BOTTOM POSITION
+   PRIMARY BUTTON
 ================================ */
-.action-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 30px auto 40px;
-    padding-top: 20px;
-    border-top: 1px dashed #cfd8dc;
-    max-width: 850px;
-}
-
-.btn-action {
-    padding: 10px 22px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 10px;
-    border: none;
-    background: #f1f1f1;
-    color: #333;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.btn-action:hover {
-    background: #e0e0e0;
-}
-
-/* Primary button */
-.btn-action.primary {
-    background: #0A3D62;
-    color: #fff;
-}
-
-.btn-action.primary:hover {
-    background: #083358;
-}
-
-/* Hide buttons while printing */
-@media print {
-    .action-buttons {
-        display: none !important;
-    }
-}
-
 .btn-primary {
     margin-top: 30px;
     width: 100%;
     padding: 14px;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     background: linear-gradient(90deg, #0A3D62, #0d4f7a);
     color: #ffffff;
     border: none;
@@ -167,7 +140,9 @@ input[readonly] {
     background: linear-gradient(90deg, #083358, #0A3D62);
 }
 
-/* ----------------- FOOTER ----------------- */
+/* ===============================
+   FOOTER (BOOKING)
+================================ */
 footer {
     text-align: center;
     padding: 15px;
@@ -175,78 +150,89 @@ footer {
     color: #083358;
 }
 
-/* ----------------- INVOICE (PRINT) ----------------- */
+/* ===============================
+   INVOICE CONTAINER
+================================ */
 .invoice {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 850px;
+    margin: 30px auto 10px;
+    background: #fff;
     border: 2px solid #0A3D62;
+    border-radius: 10px;
+    padding: 25px 30px 20px;
 }
 
-.header {
-    display: flex;
+/* ===============================
+   INVOICE HEADER (LOGO | NAME | META)
+================================ */
+.invoice-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    border-bottom: 3px solid #0A3D62;
-    padding-bottom: 8px;
+    gap: 15px;
+    border-bottom: 2px solid #0A3D62;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .logo img {
-    height: 100px;
-}
-
-.company {
-    margin-left: 15px;
+    height: 70px;
 }
 
 .company h1 {
     margin: 0;
+    font-size: 22px;
+    font-weight: 700;
     color: #0A3D62;
 }
 
 .company p {
-    margin: 2px 0;
+    margin: 2px 0 0;
     font-size: 13px;
+    color: #333;
+}
+
+.invoice-meta {
+    text-align: right;
+    font-size: 13px;
+}
+
+.invoice-meta div {
+    margin-bottom: 4px;
+}
+
+/* ===============================
+   ROWS & SECTIONS
+================================ */
+.section {
+    margin-top: 18px;
+}
+
+.section h3 {
+    font-size: 14px;
+    font-weight: 600;
+    border-bottom: 1px solid #d6e2ee;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 6px 0;
-    border-bottom: 1px dashed #cfd8dc;
-    font-size: 14px;
+    border-bottom: 1px dashed #d0dbe5;
+    font-size: 13.5px;
 }
 
-.section {
-    margin-top: 15px;
+.row strong {
+    font-weight: 600;
 }
 
-.terms {
-    margin-top: 10px;
-    font-size: 12px;
-    background: #eef3f8;
-    padding: 8px;
-    border-left: 5px solid #0A3D62;
+.row span {
+    font-weight: 500;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 13px;
-}
-
-/* ----------------- PRINT MODE ----------------- */
-@media print {
-  .top-header,
-  .btn-primary,
-  footer,
-  button {
-    display: none !important;
-  }
-
-  .invoice {
-    transform: scale(0.95);
-    transform-origin: top;
-  }
-}
 /* ===============================
    LUGGAGE | PAYMENT SIDE BY SIDE
 ================================ */
@@ -266,16 +252,18 @@ footer {
 
 .section.split .box h3 {
     margin-top: 0;
-    font-size: 14px;
-    font-weight: 600;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #d6e2ee;
 }
 
-/* PAYMENT HIGHLIGHT */
+/* PAYMENT BOX */
 .box.payment {
     background: #f1f6fb;
     border-left: 4px solid #0A3D62;
+}
+
+.box.payment .total {
+    background: #eaf2fb;
+    padding: 8px 10px;
+    border-radius: 6px;
 }
 
 .box.payment .total strong,
@@ -284,9 +272,124 @@ footer {
     font-size: 15px;
 }
 
-/* MOBILE STACK */
+.amount-words span {
+    font-size: 12px;
+    font-style: italic;
+    color: #444;
+}
+
+/* ===============================
+   TERMS
+================================ */
+.terms {
+    margin-top: 20px;
+    background: #f1f6fb;
+    padding: 10px 15px;
+    border-left: 4px solid #0A3D62;
+    font-size: 12.5px;
+}
+
+.terms h3 {
+    margin-top: 0;
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin: 25px auto 10px;
+    padding-top: 15px;
+    border-top: 1px dashed #cfd8dc;
+}
+
+.btn-action {
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.btn-action.primary {
+    background: #0A3D62;
+    color: #fff;
+}
+
+/* ===============================
+   PAID / UNPAID STAMP
+================================ */
+.payment-stamp {
+    display: inline-block;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.payment-stamp.paid {
+    background: #e6f4ea;
+    color: #1e7e34;
+    border: 2px solid #1e7e34;
+}
+
+.payment-stamp.unpaid {
+    background: #fdecea;
+    color: #c82333;
+    border: 2px solid #c82333;
+}
+
+/* ===============================
+   INVOICE FOOTER
+================================ */
+.invoice .footer {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12.5px;
+    color: #333;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
 @media (max-width: 700px) {
     .section.split {
         grid-template-columns: 1fr;
+    }
+
+    .invoice-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .invoice-meta {
+        text-align: center;
+    }
+}
+
+/* ===============================
+   PRINT MODE
+================================ */
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .top-header,
+    footer,
+    .btn-primary,
+    .action-buttons,
+    button {
+        display: none !important;
+    }
+
+    .invoice {
+        margin: 0 auto;
+        border: 2px solid #000;
     }
 }
