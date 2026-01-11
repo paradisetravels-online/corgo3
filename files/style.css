@@ -1,0 +1,249 @@
+/* ----------------- GLOBAL ----------------- */
+* {
+    box-sizing: border-box;
+    font-family: 'Urbanist', sans-serif;
+    font-weight: 600;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f8;
+    color: #2b2b2b;
+}
+
+/* ----------------- HEADER ----------------- */
+.top-header {
+    background: linear-gradient(90deg, #0A3D62, #083358);
+    color: #fff;
+    text-align: center;
+    padding: 18px;
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.top-header p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ----------------- LAYOUT ----------------- */
+.wrapper {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.card, .invoice {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* ----------------- TITLES ----------------- */
+h2, h3 {
+    color: #0A3D62;
+    border-bottom: 2px solid #dbe3ea;
+    padding-bottom: 5px;
+    margin-top: 25px;
+}
+
+/* ----------------- GRID ----------------- */
+.grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* ----------------- FORM FIELDS ----------------- */
+.field label {
+    font-weight: bold;
+    font-size: 13px;
+    color: #083358;
+}
+
+.field input,
+.field select {
+    width: 100%;
+    padding: 9px;
+    margin-top: 4px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.field input:focus,
+.field select:focus {
+    outline: none;
+    border-color: #0A3D62;
+}
+
+input[readonly] {
+    background: #eef3f8;
+    cursor: not-allowed;
+}
+
+/* ----------------- RECEIVER ----------------- */
+.receiver-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkbox {
+    font-size: 14px;
+    color: #083358;
+}
+
+/* ===============================
+   ACTION BUTTONS – BOTTOM POSITION
+================================ */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px auto 40px;
+    padding-top: 20px;
+    border-top: 1px dashed #cfd8dc;
+    max-width: 850px;
+}
+
+.btn-action {
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    background: #f1f1f1;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-action:hover {
+    background: #e0e0e0;
+}
+
+/* Primary button */
+.btn-action.primary {
+    background: #0A3D62;
+    color: #fff;
+}
+
+.btn-action.primary:hover {
+    background: #083358;
+}
+
+/* Hide buttons while printing */
+@media print {
+    .action-buttons {
+        display: none !important;
+    }
+}
+
+.btn-primary {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #0A3D62, #0d4f7a);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #083358, #0A3D62);
+}
+
+/* ----------------- FOOTER ----------------- */
+footer {
+    text-align: center;
+    padding: 15px;
+    font-size: 13px;
+    color: #083358;
+}
+
+/* ----------------- INVOICE (PRINT) ----------------- */
+.invoice {
+    max-width: 800px;
+    margin: 20px auto;
+    border: 2px solid #0A3D62;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px solid #0A3D62;
+    padding-bottom: 8px;
+}
+
+.logo img {
+    height: 100px;
+}
+
+.company {
+    margin-left: 15px;
+}
+
+.company h1 {
+    margin: 0;
+    color: #0A3D62;
+}
+
+.company p {
+    margin: 2px 0;
+    font-size: 13px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px dashed #cfd8dc;
+    font-size: 14px;
+}
+
+.section {
+    margin-top: 15px;
+}
+
+.terms {
+    margin-top: 10px;
+    font-size: 12px;
+    background: #eef3f8;
+    padding: 8px;
+    border-left: 5px solid #0A3D62;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+/* ----------------- PRINT MODE ----------------- */
+@media print {
+  .top-header,
+  .btn-primary,
+  footer,
+  button {
+    display: none !important;
+  }
+
+  .invoice {
+    transform: scale(0.95);
+    transform-origin: top;
+  }
+}
